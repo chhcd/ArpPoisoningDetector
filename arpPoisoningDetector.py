@@ -19,7 +19,7 @@ def wait_for_answer(packet):
 def buildPacket(ip):
     mypacket = Ether()/ARP()
     mypacket.op = 1 #request
-    mypacket.psrc="10.12.161.84" #IP OF HOST/DETECTOR
+    mypacket.psrc="192.168.43.248" #IP OF HOST/DETECTOR
     mypacket.hwdst="ff:ff:ff:ff:ff:ff" # all victims
     mypacket.pdst = ip # IP OF VICTIMA
     mypacket.dst = "ff:ff:ff:ff:ff:ff" # all victims
@@ -32,7 +32,7 @@ def check_for_and_add(packet, key):
         packet[key] = 1
 
 def arp_traffic(packet):
-    if ARP in pkt and packet[ARP].op == 2: #is-at
+    if ARP in packet and packet[ARP].op == 2: #is-at
         key = packet[ARP].hwsrc +  packet[ARP].psrc
         check_for_and_add(packets, key)
 
